@@ -17,7 +17,8 @@ public class IndexCommand extends CommandBase {
         addRequirements((Subsystem) Index);
     }
 
-    public void index() {
+    @Override
+    public void execute() {
         if (Up) {
             Index.index(1);
         } if (Down) {

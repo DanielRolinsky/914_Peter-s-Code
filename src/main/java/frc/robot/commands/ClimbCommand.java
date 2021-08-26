@@ -17,6 +17,7 @@ public class ClimbCommand extends CommandBase {
         addRequirements(Climb);
     }
 
+    @Override
     public void execute() {
         if (extend) {
             Climb.extendClimber();

@@ -19,6 +19,8 @@ public class ShooterCommand extends CommandBase{
 
         addRequirements(Shooter);
         }
+
+    @Override
     public void execute() {
         if (shoot) {
             Shooter.rotationDirection();

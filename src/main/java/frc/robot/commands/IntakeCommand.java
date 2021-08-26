@@ -14,6 +14,8 @@ public class IntakeCommand extends CommandBase {
 
         addRequirements(intake);
     }
+
+    @Override
     public void execute() {
         if(this.spinIn) {
             intake.intake(1);

@@ -25,7 +25,15 @@ public class DriveSubsystem extends SubsystemBase {
 
     DifferentialDrive drive = new DifferentialDrive(right, left);
 
-    public void arcadeDrive(double speed, double rotation) {arcadeDrive(speed, rotation);}
+    public DriveSubsystem() {
+        final CANEncoder rightEncoder1 = right1.getEncoder();
+        final CANEncoder rightEncoder2 = right2.getEncoder();
+
+        final CANEncoder leftEncoder1 = left1.getEncoder();
+        final CANEncoder leftEncoder2 = left2.getEncoder();
+    }
+
+    public void arcadeDrive(double speed, double rotation) {drive.arcadeDrive(speed, rotation);}
 
     public void shiftGear(int stage) {
         if (stage == 1) {
