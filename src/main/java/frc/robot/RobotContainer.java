@@ -13,6 +13,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -37,18 +38,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
-    double YstickPosition = masterController.getY(GenericHID.Hand.kLeft);
-    double XstickPosition = masterController.getX(GenericHID.Hand.kLeft);
-    if (YstickPosition > 1 || YstickPosition < -1){
-      YstickPosition = YstickPosition / 100;
-    } else if (XstickPosition > 1 || XstickPosition < -1) {
-      XstickPosition = XstickPosition /100;
-    }
-    final double speed = YstickPosition;
-    final double rotation = XstickPosition;
-
-    Drivetrain.setDefaultCommand(new RunCommand(() -> Drivetrain.arcadeDrive(speed, rotation), Drivetrain));
+    Drivetrain.setDefaultCommand(new RunCommand(() -> Drivetrain.arcadeDrive(masterController.getY(GenericHID.Hand.kLeft), masterController.getX(GenericHID.Hand.kLeft)), Drivetrain));
   }
 
   final IntakeSubsystem Intake = new IntakeSubsystem();
@@ -64,7 +54,21 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    if (masterController.getAButton()) {
+    new JoystickButton(masterController, 2)
+            .whileHeld(
+            () -> {
+              IntakeCommand Intaking = new IntakeCommand(true, Intake);
+            },
+            Intake);
+
+    /**new JoystickButton(masterController, 2)
+            .whileHeld(
+              () -> {
+                IndexCommand Indexing = new IndexCommand(true, false, Index);
+              },
+              Index);
+*/
+    /**if (masterController.getAButton()) {
       IntakeCommand Intaking = new IntakeCommand(true, Intake);
     }
     if (masterController.getXButton()) {
@@ -93,10 +97,9 @@ public class RobotContainer {
       if (Climbing.latestAction == 'e') {
         ClimbCommand ClimbingR = new ClimbCommand(false, true, Climb);
       }
-    }
-    if (true) {
+    } else if (true) {
       IntakeCommand Intaking = new IntakeCommand(true, Intake);
-    }  //Add drive binding
+    }  //Add drive binding */
 
     SmartDashboard.putBoolean("AButtonValue", masterController.getAButton());
   }
