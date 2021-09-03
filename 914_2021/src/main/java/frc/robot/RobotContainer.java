@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,6 +24,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+
+  ClimbCommand x;
 
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -54,12 +57,26 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(masterController, 2)
-            .whileHeld(
-            () -> {
-              IntakeCommand Intaking = new IntakeCommand(true, Intake);
-            },
-            Intake);
+    new JoystickButton(masterController, 2).whenPressed(new IntakeCommand(true, Intake)).whenReleased(new IntakeCommand(false, Intake));
+
+    new JoystickButton(masterController, 1).whenPressed(new IndexCommand(true, false, Index)).whenReleased(new IndexCommand(false, false, Index));
+
+    new JoystickButton(masterController, 8).whenPressed(new ShooterCommand(false, false, true, 0.5, Shoot)).whenReleased(new ShooterCommand(false, false, false, 0, Shoot));
+
+
+   //new JoystickButton(masterController, 3).whenPressed();
+/**
+    ClimbCommand Climbing = new ClimbCommand(false, false, Climb);
+    if (Climbing.latestAction == 'r') {
+      ClimbCommand x = new ClimbCommand(true, false, Climb);
+    } else if (Climbing.latestAction == 'e') {
+      ClimbCommand x = new ClimbCommand(false, true, Climb);
+    }
+    new JoystickButton(masterController, 4).whileHeld(x);
+    // double TriggerPosition = masterController.getTriggerAxis(GenericHID.Hand.kRight);
+   
+*/
+
 
     /**new JoystickButton(masterController, 2)
             .whileHeld(
@@ -101,7 +118,7 @@ public class RobotContainer {
       IntakeCommand Intaking = new IntakeCommand(true, Intake);
     }  //Add drive binding */
 
-    SmartDashboard.putBoolean("AButtonValue", masterController.getAButton());
+    // SmartDashboard.putBoolean("AButtonValue", masterController.getAButton());
   }
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.

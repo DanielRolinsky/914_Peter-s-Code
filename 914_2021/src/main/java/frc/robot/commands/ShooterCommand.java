@@ -29,6 +29,8 @@ public class ShooterCommand extends CommandBase{
             Shooter.adjustAngleUp();
         } if (adjustAngleDown) {
             Shooter.adjustAngleDown();
+        } if (shoot == false){
+            Shooter.stopShooting();
         }
     }
 }

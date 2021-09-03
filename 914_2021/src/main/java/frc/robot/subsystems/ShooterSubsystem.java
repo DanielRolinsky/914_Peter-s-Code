@@ -17,14 +17,16 @@ public class ShooterSubsystem extends SubsystemBase {
     private final CANEncoder angleAdjustEncoder = angleAdjust.getEncoder();
 
     public void rotationDirection() {
-        leftWheel.setInverted(true);
-        rightWheel.setInverted(false);
+        //leftWheel.setInverted(false);
+        //rightWheel.setInverted(false);
 
+        /**
         leftWheelEncoder.setInverted(true);
         rightWheelEncoder.setInverted(false);
 
         angleAdjust.setInverted(false);
         angleAdjustEncoder.setInverted(false);
+        */
     }
 
     public void shoot(double speed) {
@@ -51,14 +53,19 @@ public class ShooterSubsystem extends SubsystemBase {
         }
     }
 
+    public void stopShooting() {
+        leftWheel.set(0);
+        rightWheel.set(0);
+    }
+
     public void adjustAngleUp() {
         while (angleAdjustEncoder.getPosition() < 6.6) {
-            angleAdjust.set(0.05);
+            angleAdjust.set(0.02);
         }
     }
     public void adjustAngleDown() {
         while (angleAdjustEncoder.getPosition() > -2.88) {
-            angleAdjust.set(-0.05);
+            angleAdjust.set(-0.02);
         }
     }
 

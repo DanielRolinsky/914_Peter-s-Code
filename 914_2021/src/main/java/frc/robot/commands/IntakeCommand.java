@@ -18,8 +18,8 @@ public class IntakeCommand extends CommandBase {
     @Override
     public void execute() {
         if(this.spinIn) {
-            intake.intake(1);
-        } else {
+            intake.intake(0.5);
+        } else if (this.spinIn == false) {
             intake.intake(0);
         }
     }

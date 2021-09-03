@@ -14,18 +14,18 @@ public class IndexCommand extends CommandBase {
         this.Down = Down;
         this.Index = Index;
 
-        addRequirements((Subsystem) Index);
+        addRequirements(Index);
     }
 
     @Override
     public void execute() {
         if (Up) {
-            Index.index(1);
-        } if (Down) {
-            Index.index(-1);
-        } if (Up && Down) {
+            Index.index(0.5);
+        } else if (Down) {
+            Index.index(-0.3);
+        } else if (Up && Down) {
             // Display error on the driver station
-        } else {
+        } else if (Up == false && Down == false) {
             Index.index(0);
         }
     }
