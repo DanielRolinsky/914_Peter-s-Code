@@ -25,6 +25,8 @@ public class ClimbCommand extends CommandBase {
         } if (retract) {
             Climb.retractClimber();
             latestAction = 'r';
+        } else if (extend == false && retract == false) {
+            Climb.stopMotor();
         }
     }
 }

@@ -30,8 +30,9 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void shoot(double speed) {
-        leftWheel.set(speed);
+        leftWheel.set(-speed);
         rightWheel.set(speed);
+        /**
         double leftVelocity = leftWheelEncoder.getVelocity();
         double rightVelocity = rightWheelEncoder.getVelocity();
         double newSpeed = speed;
@@ -50,7 +51,7 @@ public class ShooterSubsystem extends SubsystemBase {
                 leftWheel.set(newSpeed - .01);
                 newSpeed = newSpeed - .01;
             }
-        }
+        }*/
     }
 
     public void stopShooting() {

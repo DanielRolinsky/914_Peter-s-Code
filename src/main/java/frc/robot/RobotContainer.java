@@ -27,6 +27,7 @@ public class RobotContainer {
 
   ClimbCommand x;
 
+
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -56,12 +57,17 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
-    new JoystickButton(masterController, 2).whenPressed(new IntakeCommand(true, Intake)).whenReleased(new IntakeCommand(false, Intake));
+    
+    new JoystickButton(masterController, 2).whenPressed(new IntakeCommand(true, false, false, Intake)).whenReleased(new IntakeCommand(false, false, false, Intake));
+    new JoystickButton(masterController, 3).whenPressed(new IntakeCommand(false, true, false, Intake)).whenReleased(new IntakeCommand(false, false, true, Intake));
 
     new JoystickButton(masterController, 1).whenPressed(new IndexCommand(true, false, Index)).whenReleased(new IndexCommand(false, false, Index));
 
-    new JoystickButton(masterController, 8).whenPressed(new ShooterCommand(false, false, true, 0.5, Shoot)).whenReleased(new ShooterCommand(false, false, false, 0, Shoot));
+    new JoystickButton(masterController, 8).whenPressed(new ShooterCommand(false, false, true, 0.5, Shoot)).whenReleased(new ShooterCommand
+    (false, false, false, 0, Shoot));
+
+    new JoystickButton(masterController, 6).whenPressed(new ClimbCommand(true, false, Climb)).whenReleased(new ClimbCommand(false, false, Climb));
+    new JoystickButton(masterController, 5).whenPressed(new ClimbCommand(false, true, Climb)).whenReleased(new ClimbCommand(false, false, Climb));
 
 
    //new JoystickButton(masterController, 3).whenPressed();
@@ -120,6 +126,15 @@ public class RobotContainer {
 
     // SmartDashboard.putBoolean("AButtonValue", masterController.getAButton());
   }
+
+  /**public void ClimbActionExtend() {
+    new JoystickButton(masterController, 4).whenPressed(new ClimbCommand(true, false, Climb)).whenReleased(new ClimbCommand(false, false, Climb));
+  }
+
+  public void ClimbActionRetract() {
+    new JoystickButton(masterController, 4).whenPressed(new ClimbCommand(false, true, Climb)).whenReleased(new ClimbCommand(false, false, Climb));
+  }*/
+
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
      *

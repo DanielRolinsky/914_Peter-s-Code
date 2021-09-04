@@ -25,12 +25,13 @@ public class ShooterCommand extends CommandBase{
         if (shoot) {
             Shooter.rotationDirection();
             Shooter.shoot(shootingSpeed);
-        } if (adjustAngleUp) {
+        } else if (adjustAngleUp) {
             Shooter.adjustAngleUp();
-        } if (adjustAngleDown) {
+        } else if (adjustAngleDown) {
             Shooter.adjustAngleDown();
-        } if (shoot == false){
+        } else if (shoot == false){
             Shooter.stopShooting();
+            Shooter.shoot(0);
         }
     }
 }

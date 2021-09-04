@@ -4,9 +4,12 @@
 
 package frc.robot;
 
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.ClimbCommand;
+import frc.robot.subsystems.ClimbSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -79,9 +82,19 @@ public class Robot extends TimedRobot {
     }
   }
 
+  
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    /**final ClimbSubsystem Climb = new ClimbSubsystem();
+    ClimbCommand Climbing = new ClimbCommand(false, false, Climb); 
+    RobotContainer RoboCont = new RobotContainer();
+    if (Climbing.latestAction == 'r') {
+      RoboCont.ClimbActionExtend();
+    } else if (Climbing.latestAction == 'e') {
+      RoboCont.ClimbActionRetract();
+    }*/
+  }
 
   @Override
   public void testInit() {
