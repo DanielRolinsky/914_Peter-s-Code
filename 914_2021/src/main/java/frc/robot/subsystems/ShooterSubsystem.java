@@ -3,6 +3,9 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.CANEncoder;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -15,6 +18,8 @@ public class ShooterSubsystem extends SubsystemBase {
     private final CANEncoder leftWheelEncoder = leftWheel.getEncoder();
     private final CANEncoder rightWheelEncoder = rightWheel.getEncoder();
     private final CANEncoder angleAdjustEncoder = angleAdjust.getEncoder();
+
+    public final XboxController masterController = new XboxController(0);
 
     public void rotationDirection() {
         //leftWheel.setInverted(false);
@@ -59,6 +64,20 @@ public class ShooterSubsystem extends SubsystemBase {
         rightWheel.set(0);
     }
 
+    @Override
+    public void periodic() {
+        if (masterController.getY(GenericHID.Hand.kRight) > .25) {
+            angleAdjust.set(0.05);
+        } else if (masterController.getY(GenericHID.Hand.kRight) < -.25) {
+            angleAdjust.set(-0.05);
+        } else if (masterController.getY(GenericHID.Hand.kRight) > -.24 && masterController.getY(GenericHID.Hand.kRight) < .24) {
+            angleAdjust.set(0);
+        } else if (masterController.getTriggerAxis(GenericHID.Hand.kRight) > 0) {
+            leftWheel.set(-masterController.getTriggerAxis(GenericHID.Hand.kRight));
+            rightWheel.set(masterController.getTriggerAxis(GenericHID.Hand.kRight));
+        }
+    }
+    /**
     public void adjustAngleUp() {
         while (angleAdjustEncoder.getPosition() < 6.6) {
             angleAdjust.set(0.02);
@@ -68,6 +87,5 @@ public class ShooterSubsystem extends SubsystemBase {
         while (angleAdjustEncoder.getPosition() > -2.88) {
             angleAdjust.set(-0.02);
         }
-    }
-
+    }*/
 }

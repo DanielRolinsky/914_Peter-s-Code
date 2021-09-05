@@ -58,13 +58,13 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     
-    new JoystickButton(masterController, 2).whenPressed(new IntakeCommand(true, false, false, Intake)).whenReleased(new IntakeCommand(false, false, false, Intake));
-    new JoystickButton(masterController, 3).whenPressed(new IntakeCommand(false, true, false, Intake)).whenReleased(new IntakeCommand(false, false, true, Intake));
+    new JoystickButton(masterController, 1).whenPressed(new IntakeCommand(true, false, false, Intake)).whenReleased(new IntakeCommand(false, false, false, Intake));
+    new JoystickButton(masterController, 2).whenPressed(new IntakeCommand(false, true, false, Intake)).whenReleased(new IntakeCommand(false, false, true, Intake));
 
-    new JoystickButton(masterController, 1).whenPressed(new IndexCommand(true, false, Index)).whenReleased(new IndexCommand(false, false, Index));
+    new JoystickButton(masterController, 3).whenPressed(new IndexCommand(true, false, Index)).whenReleased(new IndexCommand(false, false, Index));
 
-    new JoystickButton(masterController, 8).whenPressed(new ShooterCommand(false, false, true, 0.5, Shoot)).whenReleased(new ShooterCommand
-    (false, false, false, 0, Shoot));
+    // new JoystickButton(masterController, 8).whenPressed(new ShooterCommand(true, 0.5, Shoot)).whenReleased(new ShooterCommand
+    // (false, 0, Shoot));
 
     new JoystickButton(masterController, 6).whenPressed(new ClimbCommand(true, false, Climb)).whenReleased(new ClimbCommand(false, false, Climb));
     new JoystickButton(masterController, 5).whenPressed(new ClimbCommand(false, true, Climb)).whenReleased(new ClimbCommand(false, false, Climb));
